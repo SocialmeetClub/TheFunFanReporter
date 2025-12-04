@@ -1,0 +1,411 @@
+<!-- PASTE THIS INTO WORDPRESS CUSTOM HTML BLOCK -->
+
+<style>
+  /* Force Full Screen - Break Out of WordPress Container */
+  #funfan-fullscreen-landing {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 999999 !important;
+    overflow: hidden !important;
+    background: #050505;
+  }
+
+  /* Reset WordPress Theme Styles */
+  #funfan-fullscreen-landing * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Stadium Background Image */
+  .funfan-stadium-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('YOUR_STADIUM_IMAGE_URL_HERE.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  /* Dark Overlay for Contrast */
+  .funfan-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.7) 0%, rgba(5, 5, 5, 0.95) 100%);
+    z-index: 2;
+  }
+
+  /* Animated Radar Grid Floor */
+  .funfan-radar-grid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(0, 255, 65, 0.08) 25%, rgba(0, 255, 65, 0.08) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, 0.08) 75%, rgba(0, 255, 65, 0.08) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(0, 255, 65, 0.08) 25%, rgba(0, 255, 65, 0.08) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, 0.08) 75%, rgba(0, 255, 65, 0.08) 76%, transparent 77%, transparent);
+    background-size: 60px 60px;
+    transform: perspective(400px) rotateX(60deg);
+    transform-origin: bottom;
+    opacity: 0.7;
+    animation: funfanGridMove 15s linear infinite;
+    z-index: 3;
+  }
+
+  @keyframes funfanGridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 60px; }
+  }
+
+  /* Lightning Flash Every 8 Seconds */
+  .funfan-lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 65, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 4;
+    animation: funfanLightning 8s infinite;
+  }
+
+  @keyframes funfanLightning {
+    0%, 100% { opacity: 0; }
+    49.5% { opacity: 0; }
+    50% { opacity: 1; }
+    50.5% { opacity: 0; }
+    51% { opacity: 1; }
+    51.5% { opacity: 0; }
+  }
+
+  /* Main Content Container */
+  .funfan-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
+  }
+
+  /* Mascot Image */
+  .funfan-mascot {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto 2rem;
+    display: block;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.6));
+    animation: funfanFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes funfanFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Glitch Title Effect */
+  .funfan-glitch-title {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(2rem, 10vw, 5rem);
+    font-weight: bold;
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    position: relative;
+    text-shadow: 
+      0 0 10px #00ff41,
+      0 0 20px #00ff41,
+      0 0 40px #00ff41;
+    animation: funfanGlitch 3s infinite;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+  }
+
+  .funfan-glitch-title::before,
+  .funfan-glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .funfan-glitch-title::before {
+    animation: funfanGlitchTop 2s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+    color: #ff00ff;
+    text-shadow: 3px 0 #ff00ff;
+  }
+
+  .funfan-glitch-title::after {
+    animation: funfanGlitchBottom 2.5s infinite;
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    color: #00ffff;
+    text-shadow: -3px 0 #00ffff;
+  }
+
+  @keyframes funfanGlitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+  }
+
+  @keyframes funfanGlitchTop {
+    0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%); transform: translate(0); }
+    20% { clip-path: polygon(0 10%, 100% 10%, 100% 50%, 0 50%); transform: translate(-5px, 5px); }
+    40% { clip-path: polygon(0 5%, 100% 5%, 100% 45%, 0 45%); transform: translate(5px, -5px); }
+    60% { clip-path: polygon(0 15%, 100% 15%, 100% 55%, 0 55%); transform: translate(-5px, -5px); }
+    80% { clip-path: polygon(0 8%, 100% 8%, 100% 48%, 0 48%); transform: translate(5px, 5px); }
+  }
+
+  @keyframes funfanGlitchBottom {
+    0%, 100% { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform: translate(0); }
+    25% { clip-path: polygon(0 55%, 100% 55%, 100% 95%, 0 95%); transform: translate(5px, -5px); }
+    50% { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); transform: translate(-5px, 5px); }
+    75% { clip-path: polygon(0 58%, 100% 58%, 100% 98%, 0 98%); transform: translate(-5px, -5px); }
+  }
+
+  /* Subtitle */
+  .funfan-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    text-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+  }
+
+  /* HUGE Mobile-First Button with Heartbeat */
+  .funfan-cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+    color: #050505;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: clamp(1.2rem, 4vw, 2rem) clamp(2.5rem, 8vw, 5rem);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 65, 0.7),
+      0 0 60px rgba(0, 255, 65, 0.5),
+      0 0 90px rgba(0, 255, 65, 0.3);
+    animation: funfanHeartbeat 1.5s infinite;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 100;
+    min-width: 280px;
+    text-align: center;
+  }
+
+  .funfan-cta-button:hover {
+    transform: scale(1.08);
+    box-shadow: 
+      0 0 40px rgba(0, 255, 65, 0.9),
+      0 0 80px rgba(0, 255, 65, 0.7),
+      0 0 120px rgba(0, 255, 65, 0.5);
+  }
+
+  @keyframes funfanHeartbeat {
+    0%, 100% { 
+      transform: scale(1);
+      box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.7),
+        0 0 60px rgba(0, 255, 65, 0.5),
+        0 0 90px rgba(0, 255, 65, 0.3);
+    }
+    14% { 
+      transform: scale(1.12);
+      box-shadow: 
+        0 0 40px rgba(0, 255, 65, 0.9),
+        0 0 80px rgba(0, 255, 65, 0.7),
+        0 0 120px rgba(0, 255, 65, 0.5);
+    }
+    28% { 
+      transform: scale(1);
+      box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.7),
+        0 0 60px rgba(0, 255, 65, 0.5),
+        0 0 90px rgba(0, 255, 65, 0.3);
+    }
+    42% { 
+      transform: scale(1.12);
+      box-shadow: 
+        0 0 40px rgba(0, 255, 65, 0.9),
+        0 0 80px rgba(0, 255, 65, 0.7),
+        0 0 120px rgba(0, 255, 65, 0.5);
+    }
+    56% { 
+      transform: scale(1);
+      box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.7),
+        0 0 60px rgba(0, 255, 65, 0.5),
+        0 0 90px rgba(0, 255, 65, 0.3);
+    }
+  }
+
+  /* Frankenstein Energy Bolts */
+  .funfan-bolt {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #00ff41;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #00ff41;
+    animation: funfanBoltPulse 2s infinite;
+    z-index: 5;
+  }
+
+  .funfan-bolt-left {
+    top: 40%;
+    left: 3%;
+  }
+
+  .funfan-bolt-right {
+    top: 40%;
+    right: 3%;
+  }
+
+  @keyframes funfanBoltPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .funfan-radar-grid {
+      height: 40%;
+    }
+
+    .funfan-mascot {
+      max-width: 200px;
+      margin-bottom: 1.5rem;
+    }
+
+    .funfan-glitch-title {
+      letter-spacing: 0.05em;
+    }
+
+    .funfan-subtitle {
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .funfan-bolt {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .funfan-content {
+      width: 95%;
+      padding: 15px;
+    }
+
+    .funfan-mascot {
+      max-width: 150px;
+      margin-bottom: 1rem;
+    }
+
+    .funfan-cta-button {
+      min-width: 260px;
+      letter-spacing: 0.08em;
+    }
+
+    .funfan-bolt {
+      display: none;
+    }
+  }
+
+  /* Ensure Button is Always Visible */
+  @media (max-height: 600px) {
+    .funfan-mascot {
+      max-width: 120px;
+      margin-bottom: 0.5rem;
+    }
+
+    .funfan-glitch-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .funfan-subtitle {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<div id="funfan-fullscreen-landing">
+  <!-- Background Layers -->
+  <div class="funfan-stadium-bg"></div>
+  <div class="funfan-dark-overlay"></div>
+  <div class="funfan-radar-grid"></div>
+  <div class="funfan-lightning"></div>
+  
+  <!-- Frankenstein Energy Bolts -->
+  <div class="funfan-bolt funfan-bolt-left"></div>
+  <div class="funfan-bolt funfan-bolt-right"></div>
+  
+  <!-- Main Content -->
+  <div class="funfan-content">
+    <!-- Mascot Image (Add your URL below) -->
+    <img src="YOUR_MASCOT_IMAGE_URL_HERE.png" alt="Frankenstein Mascot" class="funfan-mascot" />
+    
+    <!-- Glitch Title -->
+    <h1 class="funfan-glitch-title" data-text="THE FUN FAN REPORTER">
+      THE FUN FAN REPORTER
+    </h1>
+    
+    <!-- Subtitle -->
+    <p class="funfan-subtitle">Frankenstein's Lab Meets Cyberpunk Stadium</p>
+    
+    <!-- HUGE CTA Button -->
+    <a href="#chat" class="funfan-cta-button" onclick="openLiveChat(); return false;">
+      ⚡ OPEN LIVE CHAT ⚡
+    </a>
+  </div>
+</div>
+
+<script>
+  function openLiveChat() {
+    // Add your chat opening logic here
+    // Example: Scroll to chat widget or open modal
+    alert('Opening Live Chat! 🎮⚡');
+    
+    // Or navigate to chat page:
+    // window.location.href = '/chat';
+    
+    // Or trigger chat widget:
+    // document.getElementById('funfan-chat-widget').classList.remove('funfan-hidden');
+  }
+</script>

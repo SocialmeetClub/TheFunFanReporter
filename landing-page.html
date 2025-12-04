@@ -1,324 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Fun Fan Reporter - Frankenstein's Lab</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<!-- THEFUNFANREPORTER: FINAL NEON LANDING -->
+<style>
+  /* ☢️ NUCLEAR FULLSCREEN OVERRIDE ☢️ */
+  #funfan-nuclear-wrapper {
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    background-color: #050505; z-index: 999999;
+    overflow-y: auto; margin: 0 !important; padding: 0 !important;
+  }
+  #funfan-nuclear-wrapper * { box-sizing: border-box; font-family: 'Courier New', monospace; }
 
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Courier New', monospace;
-    }
+  /* HERO SECTION */
+  .monster-hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 4px solid #00ff41;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+  }
 
-    .frankenstein-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background: #050505;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+  .hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, #000000 95%);
+    z-index: 1;
+  }
 
-    /* Foggy Stadium Atmosphere */
-    .fog-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, transparent 0%, rgba(5, 5, 5, 0.8) 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
+  .hero-content { position: relative; z-index: 10; max-width: 1200px; width: 100%; margin-top: 40px;}
 
-    /* Green Radar Grid Floor */
-    .radar-grid {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 60%;
-      background-image: 
-        linear-gradient(0deg, transparent 24%, rgba(0, 255, 65, 0.05) 25%, rgba(0, 255, 65, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, 0.05) 75%, rgba(0, 255, 65, 0.05) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, rgba(0, 255, 65, 0.05) 25%, rgba(0, 255, 65, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, 0.05) 75%, rgba(0, 255, 65, 0.05) 76%, transparent 77%, transparent);
-      background-size: 80px 80px;
-      transform: perspective(500px) rotateX(60deg);
-      transform-origin: bottom;
-      opacity: 0.6;
-      animation: gridMove 20s linear infinite;
-      z-index: 0;
-    }
+  /* TITLE */
+  h1.monster-title {
+    color: #ffffff !important;
+    font-size: clamp(3rem, 5vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0; line-height: 1;
+    text-shadow: 4px 4px 0px #00ff41;
+    animation: glitch 5s infinite;
+  }
+  @keyframes glitch {
+    0%, 95% { transform: translate(0,0); }
+    96% { transform: translate(-3px, 3px); }
+    97% { transform: translate(3px, -3px); }
+    100% { transform: translate(0,0); }
+  }
 
-    @keyframes gridMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 80px; }
-    }
+  p.monster-sub {
+    color: #ffffff !important;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: bold;
+    margin-top: 15px; margin-bottom: 40px;
+    text-shadow: 0 0 15px #00ff41;
+    background-color: rgba(0,0,0,0.6);
+    display: inline-block; padding: 5px 20px; border-radius: 4px;
+  }
 
-    /* Lightning Flash Background */
-    .lightning-flash {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 255, 65, 0.1);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 2;
-      animation: lightning 8s infinite;
-    }
+  /* BUTTON */
+  button.funfan-open {
+    background: #00ff41; color: #000;
+    font-family: 'Courier New', monospace;
+    padding: 20px 50px;
+    font-size: 22px;
+    font-weight: 900;
+    border: 3px solid #fff;
+    box-shadow: 0 0 40px #00ff41;
+    cursor: pointer;
+    text-transform: uppercase;
+    animation: heartbeat 2s infinite;
+    display: block; margin: 0 auto;
+  }
+  @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+  
+  /* GRID */
+  .info-section { background: #0a0a0a; padding: 60px 20px; position: relative; z-index: 10; min-height: 100vh; }
+  .grid-container {
+    max-width: 1400px; margin: 0 auto; display: grid; gap: 20px; padding-bottom: 100px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .info-card {
+    background: #151515; border: 1px solid #333; padding: 25px; text-align: left;
+  }
+  .info-card h3 { color: #00ff41 !important; font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid #333; }
+  .info-card p { color: #ffffff !important; font-size: 1rem; margin: 0; }
+</style>
 
-    @keyframes lightning {
-      0%, 100% { opacity: 0; }
-      49% { opacity: 0; }
-      50% { opacity: 1; }
-      51% { opacity: 0; }
-      52% { opacity: 1; }
-      53% { opacity: 0; }
-    }
-
-    /* Content Container */
-    .content-wrapper {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 20px;
-    }
-
-    /* Glitch Title Effect */
-    .glitch-title {
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      font-weight: bold;
-      color: #00ff41;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      position: relative;
-      text-shadow: 
-        0 0 10px #00ff41,
-        0 0 20px #00ff41,
-        0 0 30px #00ff41;
-      animation: glitch 3s infinite;
-      margin-bottom: 1rem;
-    }
-
-    .glitch-title::before,
-    .glitch-title::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .glitch-title::before {
-      animation: glitchTop 2s infinite;
-      clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-      color: #ff00ff;
-      text-shadow: 2px 0 #ff00ff;
-    }
-
-    .glitch-title::after {
-      animation: glitchBottom 2.5s infinite;
-      clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-      color: #00ffff;
-      text-shadow: -2px 0 #00ffff;
-    }
-
-    @keyframes glitch {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-    }
-
-    @keyframes glitchTop {
-      0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); transform: translate(0); }
-      20% { clip-path: polygon(0 10%, 100% 10%, 100% 43%, 0 43%); transform: translate(-5px, 5px); }
-      40% { clip-path: polygon(0 5%, 100% 5%, 100% 38%, 0 38%); transform: translate(5px, -5px); }
-      60% { clip-path: polygon(0 15%, 100% 15%, 100% 48%, 0 48%); transform: translate(-5px, -5px); }
-      80% { clip-path: polygon(0 8%, 100% 8%, 100% 41%, 0 41%); transform: translate(5px, 5px); }
-    }
-
-    @keyframes glitchBottom {
-      0%, 100% { clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%); transform: translate(0); }
-      25% { clip-path: polygon(0 60%, 100% 60%, 100% 93%, 0 93%); transform: translate(5px, -5px); }
-      50% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); transform: translate(-5px, 5px); }
-      75% { clip-path: polygon(0 65%, 100% 65%, 100% 98%, 0 98%); transform: translate(-5px, -5px); }
-    }
-
-    /* Subtitle */
-    .subtitle {
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      color: #00ff41;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      margin-bottom: 3rem;
-      opacity: 0.8;
-      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-    }
-
-    /* Heartbeat Pulse Button */
-    .heartbeat-button {
-      position: relative;
-      background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
-      color: #050505;
-      font-size: clamp(1.2rem, 4vw, 2rem);
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      padding: clamp(1rem, 3vw, 1.5rem) clamp(2rem, 6vw, 4rem);
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 
-        0 0 20px rgba(0, 255, 65, 0.6),
-        0 0 40px rgba(0, 255, 65, 0.4),
-        0 0 60px rgba(0, 255, 65, 0.2);
-      animation: heartbeat 1.5s infinite;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-
-    .heartbeat-button:hover {
-      transform: scale(1.05);
-      box-shadow: 
-        0 0 30px rgba(0, 255, 65, 0.8),
-        0 0 60px rgba(0, 255, 65, 0.6),
-        0 0 90px rgba(0, 255, 65, 0.4);
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { 
-        transform: scale(1);
-        box-shadow: 
-          0 0 20px rgba(0, 255, 65, 0.6),
-          0 0 40px rgba(0, 255, 65, 0.4),
-          0 0 60px rgba(0, 255, 65, 0.2);
-      }
-      14% { 
-        transform: scale(1.1);
-        box-shadow: 
-          0 0 30px rgba(0, 255, 65, 0.8),
-          0 0 60px rgba(0, 255, 65, 0.6),
-          0 0 90px rgba(0, 255, 65, 0.4);
-      }
-      28% { 
-        transform: scale(1);
-        box-shadow: 
-          0 0 20px rgba(0, 255, 65, 0.6),
-          0 0 40px rgba(0, 255, 65, 0.4),
-          0 0 60px rgba(0, 255, 65, 0.2);
-      }
-      42% { 
-        transform: scale(1.1);
-        box-shadow: 
-          0 0 30px rgba(0, 255, 65, 0.8),
-          0 0 60px rgba(0, 255, 65, 0.6),
-          0 0 90px rgba(0, 255, 65, 0.4);
-      }
-      56% { 
-        transform: scale(1);
-        box-shadow: 
-          0 0 20px rgba(0, 255, 65, 0.6),
-          0 0 40px rgba(0, 255, 65, 0.4),
-          0 0 60px rgba(0, 255, 65, 0.2);
-      }
-    }
-
-    /* Frankenstein Bolts Decoration */
-    .bolt {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #00ff41;
-      border-radius: 50%;
-      box-shadow: 0 0 20px #00ff41;
-      animation: boltPulse 2s infinite;
-    }
-
-    .bolt-left {
-      top: 50%;
-      left: 5%;
-    }
-
-    .bolt-right {
-      top: 50%;
-      right: 5%;
-    }
-
-    @keyframes boltPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      .radar-grid {
-        height: 50%;
-      }
-
-      .subtitle {
-        margin-bottom: 2rem;
-      }
-
-      .bolt {
-        display: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .glitch-title {
-        letter-spacing: 0.05em;
-      }
-
-      .subtitle {
-        letter-spacing: 0.15em;
-      }
-
-      .heartbeat-button {
-        letter-spacing: 0.1em;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="frankenstein-container">
-    <!-- Background Effects -->
-    <div class="fog-layer"></div>
-    <div class="radar-grid"></div>
-    <div class="lightning-flash"></div>
-    
-    <!-- Frankenstein Bolts -->
-    <div class="bolt bolt-left"></div>
-    <div class="bolt bolt-right"></div>
-    
-    <!-- Main Content -->
-    <div class="content-wrapper">
-      <h1 class="glitch-title" data-text="THE FUN FAN REPORTER">THE FUN FAN REPORTER</h1>
-      <p class="subtitle">Frankenstein's Lab Meets Cyberpunk Stadium</p>
-      <button class="heartbeat-button" onclick="enterLab()">⚡ ENTER THE LAB ⚡</button>
+<div id="funfan-nuclear-wrapper">
+  <div class="monster-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="monster-title">THE FUN<br>FAN REPORTER</h1>
+      <p class="monster-sub">Real-time Fan Intel Chat for Massive Events</p>
+      <button class="funfan-open">⚡ OPEN LIVE INTEL</button>
     </div>
   </div>
-
-  <script>
-    function enterLab() {
-      // Add your navigation logic here
-      alert('Welcome to Frankenstein\'s Lab! 🧪⚡');
-      // Example: window.location.href = '/chat';
-    }
-  </script>
-</body>
-</html>
+  <div class="info-section">
+    <div class="grid-container">
+      <div class="info-card"><h3>Post Missions</h3><p>Broadcast your needs to 75,000+ users.</p></div>
+      <div class="info-card"><h3>Hyper-Local</h3><p>Don't trust maps. Trust locals.</p></div>
+      <div class="info-card"><h3>Earn USD</h3><p>50/50 Split on all Meritocracy Coin tips.</p></div>
+      <div class="info-card"><h3>24h Chats</h3><p>Pop-up chats for the Super Bowl.</p></div>
+    </div>
+  </div>
+</div>
