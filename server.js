@@ -68,8 +68,9 @@ io.on('connection', (socket) => {
   });
 });
 
+
 // Start Server
-const PORT = 3000;
-server.listen(PORT, () => {
+const PORT = process.env.PORT || 3000; // Let Render decide the port
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 TheFunFanReporter Server running on port ${PORT}`);
 });
