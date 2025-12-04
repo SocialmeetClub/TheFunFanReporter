@@ -55,7 +55,9 @@ If you want to examine the "Brain" logic locally:
     *(The server runs on port 3000 locally)*
 
 ### ⚠️ Note on Live Testing
-The Live Demo uses a **Render.com Free Tier** server.
+**TRY THE LIVE DEMO HERE:** 👉 [https://thefunfanreporter.com/kiro/](https://thefunfanreporter.com/kiro/)
+
+The backend uses a **Render.com Free Tier** server.
 *   **If the chat shows "Disconnected" initially:** Please wait **30-50 seconds** for the server to wake up from sleep mode.
 *   **Once awake:** It is instant and real-time.
 
